@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Abdellatif Guennoun - Junior Financial Engineering, FinTech & Strategy">
+    <title>Abdellatif Guennoun | Financial Engineering & Strategy</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ========================
+           MODERN FINTECH THEME
+           ======================== */
+        :root {
+            /* Backgrounds */
+            --bg-body: #0f172a;       
+            --bg-card: rgba(30, 41, 59, 0.6); 
+            --bg-card-hover: rgba(51, 65, 85, 0.8);
+            
+            /* Accents */
+            --accent-gold: #e2c08d;   
+            --accent-glow: rgba(226, 192, 141, 0.3);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            
+            /* Text */
+            --text-main: #f8fafc;    
+            --text-body: #94a3b8;    
+            --text-dark: #0f172a;
+            
+            /* Fonts */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --font-arabic: 'Cairo', sans-serif; /* New Arabic Font */
+            
+            /* Utils */
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --radius: 12px;
+            --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-glow: 0 0 20px rgba(226, 192, 141, 0.15);
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-body);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(226, 192, 141, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(30, 41, 59, 0.4) 0%, transparent 25%);
+            color: var(--text-body);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* RTL Specific Overrides for Arabic */
+        html[dir="rtl"] body {
+            font-family: var(--font-arabic);
+            text-align: right;
+        }
+
+        html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3 {
+            font-family: var(--font-arabic);
+            font-weight: 700;
+        }
+        
+        /* Fix list icons and margins in RTL */
+        html[dir="rtl"] .bio-highlight {
+            border-left: none;
+            border-right: 3px solid var(--accent-gold);
+            padding-left: 0;
+            padding-right: 15px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+
+        section {
+            padding: 100px 24px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* ========================
+           COMPONENTS
+           ======================== */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: transparent;
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0%; height: 100%;
+            background: var(--accent-gold);
+            z-index: -1;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            color: var(--text-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn:hover::before { width: 100%; }
+
+        /* RTL Button fixes */
+        html[dir="rtl"] .btn { letter-spacing: 0; }
+        html[dir="rtl"] .btn::before { left: auto; right: 0; }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            position: relative;
+            display: inline-block;
+            color: var(--text-main);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: var(--accent-gold);
+            bottom: -12px;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        html[dir="rtl"] .section-title::after {
+            left: auto;
+            right: 0;
+        }
+
+        /* ========================
+           LANGUAGE SWITCHER (New)
+           ======================== */
+        .lang-switcher {
+            position: relative;
+            margin-left: 20px;
+        }
+        
+        html[dir="rtl"] .lang-switcher {
+            margin-left: 0;
+            margin-right: 20px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .lang-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: 120%;
+            right: 0;
+            background: #0f172a;
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            width: 140px;
+            display: none;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 1001;
+            overflow: hidden;
+        }
+        
+        html[dir="rtl"] .lang-dropdown {
+            right: auto;
+            left: 0;
+        }
+
+        .lang-dropdown.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lang-option {
+            padding: 12px 16px;
+            color: var(--text-body);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-align: left;
+        }
+        
+        html[dir="rtl"] .lang-option {
+            text-align: right;
+        }
+
+        .lang-option:hover {
+            background: rgba(226, 192, 141, 0.1);
+            color: var(--accent-gold);
+        }
+
+        .lang-option img {
+            width: 20px;
+            height: auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========================
+           NAVIGATION
+           ======================== */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 24px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: var(--transition);
+            border-bottom: 1px solid transparent;
+        }
+
+        nav.scrolled {
+            background-color: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 16px 50px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+        .logo::after { content: '.'; color: var(--accent-gold); }
+
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a:not(.btn) {
+            font-size: 0.95rem;
+            color: var(--text-body);
+            font-weight: 400;
+            position: relative;
+        }
+        .nav-links a:not(.btn):hover { color: var(--accent-gold); }
+        .nav-links a:not(.btn)::after {
+            content: ''; position: absolute; width: 0; height: 1px;
+            bottom: -4px; left: 0; background-color: var(--accent-gold);
+            transition: 0.3s ease;
+        }
+        .nav-links a:not(.btn):hover::after { width: 100%; }
+
+        .menu-toggle { display: none; color: var(--text-main); font-size: 1.5rem; cursor: pointer; }
+
+        /* ========================
+           HERO SECTION
+           ======================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+            padding-top: 80px;
+        }
+
+        .hero-content { flex: 1; }
+        
+        .hero-greeting {
+            color: var(--accent-gold);
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(226, 192, 141, 0.08);
+            border-radius: 20px;
+            border: 1px solid rgba(226, 192, 141, 0.2);
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        html[dir="rtl"] .hero h1 {
+             background: linear-gradient(to left, #fff, #94a3b8);
+             -webkit-background-clip: text;
+             -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-body);
+            margin: 24px 0 40px 0;
+            max-width: 600px;
+            font-weight: 300;
+        }
+
+        .hero-tags { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 40px; }
+        .tag {
+            font-size: 0.8rem;
+            padding: 6px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-main);
+            border-radius: 6px;
+            border: 1px solid var(--border-subtle);
+            font-weight: 400;
+            transition: var(--transition);
+        }
+        .tag:hover {
+            border-color: var(--accent-gold);
+            background: rgba(226, 192, 141, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .hero-img-container { flex: 0 0 420px; height: 500px; position: relative; }
+        .hero-img {
+            width: 100%; height: 100%; object-fit: cover;
+            border-radius: var(--radius);
+            position: relative; z-index: 2;
+            filter: grayscale(20%); transition: var(--transition);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .hero-img:hover { filter: grayscale(0%); }
+        .hero-img-container::before {
+            content: ''; position: absolute; top: -20px; right: -20px;
+            width: 100%; height: 100%;
+            border: 1px solid var(--accent-gold);
+            border-radius: var(--radius); z-index: 1;
+            opacity: 0.6; transition: var(--transition);
+        }
+        
+        html[dir="rtl"] .hero-img-container::before { right: auto; left: -20px; }
+        html[dir="rtl"] .hero-img-container:hover::before { right: auto; left: 15px; top: 15px; }
+
+        .hero-img-container:hover::before { top: 15px; right: 15px; }
+
+        /* ========================
+           BIOGRAPHY SECTION
+           ======================== */
+        .bio-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            background: linear-gradient(to right, rgba(30, 41, 59, 0.3), transparent);
+            padding: 40px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-subtle);
+        }
+
+        html[dir="rtl"] .bio-wrapper {
+            background: linear-gradient(to left, rgba(30, 41, 59, 0.3), transparent);
+        }
+
+        .bio-text { flex: 1; }
+        
+        .bio-text p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            color: var(--text-body);
+        }
+
+        .bio-highlight {
+            color: var(--text-main);
+            font-weight: 500;
+            border-left: 3px solid var(--accent-gold);
+            padding-left: 15px;
+            margin: 25px 0;
+            font-style: italic;
+        }
+
+        .bio-image-box {
+            flex: 0 0 350px;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .bio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .bio-image-box:hover .bio-img { transform: scale(1.05); }
+
+        /* ========================
+           EXPERTISE / DOMAINS
+           ======================== */
+        .domains-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .domain-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .domain-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-gold);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .domain-img-header {
+            height: 160px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .domain-img-header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.4);
+        }
+
+        .domain-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .domain-card:hover .domain-img { transform: scale(1.1); }
+
+        .domain-content { padding: 25px; flex-grow: 1; }
+        
+        .domain-title {
+            color: var(--text-main);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .domain-list { margin-top: 15px; }
+        
+        .domain-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .domain-list li i {
+            color: var(--accent-gold);
+            font-size: 0.8rem;
+        }
+
+        /* ========================
+           EDUCATION SECTION
+           ======================== */
+        .edu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .edu-card {
+            background-color: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .edu-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(226, 192, 141, 0.4);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+        }
+
+        .edu-img-wrapper {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        .edu-img-wrapper::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(15, 23, 42, 0.8) 100%);
+        }
+
+        .edu-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+        .edu-card:hover .edu-img { transform: scale(1.08); }
+
+        .edu-content { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
+        
+        .edu-year {
+            font-size: 0.8rem; color: var(--accent-gold);
+            margin-bottom: 8px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        .edu-degree { font-size: 1.25rem; color: var(--text-main); margin-bottom: 8px; line-height: 1.3; }
+        .edu-school {
+            font-size: 0.95rem; color: var(--text-body); font-weight: 500;
+            padding-bottom: 15px; margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-subtle); display: block;
+        }
+
+        /* ========================
+           SKILLS SECTION
+           ======================== */
+        .skills-wrapper {
+            display: grid; grid-template-columns: 2fr 1fr; gap: 60px;
+        }
+
+        .tech-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 16px;
+        }
+
+        .skill-item {
+            background: var(--bg-card); padding: 24px 10px; text-align: center;
+            border-radius: 8px; transition: var(--transition);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 15px; border: 1px solid var(--border-subtle); height: 100%;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px); background: var(--bg-card-hover);
+            border-color: var(--accent-gold); box-shadow: var(--shadow-glow);
+        }
+
+        .skill-img {
+            width: 45px; height: 45px; object-fit: contain;
+            filter: drop-shadow(0 0 2px rgba(255,255,255,0.1)); 
+            transition: var(--transition);
+        }
+
+        .skill-item:hover .skill-img { transform: scale(1.1); }
+        .skill-name { font-size: 0.8rem; color: var(--text-main); font-weight: 500; }
+
+        .lang-container {
+            background: var(--bg-card); padding: 40px;
+            border-radius: var(--radius); border: 1px solid var(--border-subtle);
+        }
+
+        .lang-container h3 {
+            font-size: 1.5rem; margin-bottom: 30px; padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .lang-item { margin-bottom: 25px; }
+        .lang-header {
+            display: flex; justify-content: space-between; margin-bottom: 10px;
+            font-size: 0.9rem; color: var(--text-main);
+        }
+
+        .progress-bar {
+            height: 6px; background: rgba(255,255,255,0.05); 
+            border-radius: 10px; overflow: hidden; width: 100%;
+        }
+
+        .progress-fill {
+            height: 100%; background: linear-gradient(90deg, var(--accent-gold), #f3cf55);
+            border-radius: 10px; width: 0; 
+            transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+        }
+        
+        /* Mirror progress bar fill in RTL */
+        html[dir="rtl"] .progress-fill {
+            background: linear-gradient(270deg, var(--accent-gold), #f3cf55);
+        }
+        
+        .progress-fill::after {
+            content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: translateX(-100%); animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer { 100% { transform: translateX(100%); } }
+
+        /* ========================
+           FOOTER
+           ======================== */
+        footer {
+            text-align: center; padding: 80px 20px; color: var(--text-body);
+            font-size: 0.9rem; border-top: 1px solid var(--border-subtle);
+            background: linear-gradient(to top, #020617, var(--bg-body));
+            margin-top: 80px;
+        }
+        
+        .social-component {
+            display: flex; justify-content: center; gap: 1.5rem;
+            flex-wrap: wrap; margin: 3rem 0;
+        }
+
+        .social-link {
+            display: flex; align-items: center; justify-content: center;
+            width: 50px; height: 50px; border-radius: 50%;
+            border: 1px solid var(--border-subtle); background: rgba(255,255,255,0.02);
+            color: var(--text-body); font-size: 1.2rem; transition: var(--transition);
+        }
+
+        .social-link:hover {
+            border-color: var(--accent-gold); color: var(--accent-gold);
+            transform: translateY(-4px); background: rgba(226, 192, 141, 0.05);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* ========================
+           RESPONSIVE
+           ======================== */
+        @media (max-width: 968px) {
+            .hero {
+                flex-direction: column-reverse; text-align: center;
+                gap: 40px; padding-top: 120px;
+            }
+            .hero-img-container { width: 300px; height: 350px; flex: none; margin: 0 auto; }
+            .hero-tags { justify-content: center; }
+            .bio-wrapper { flex-direction: column; text-align: center; }
+            .bio-image-box { width: 100%; height: 300px; flex: none; }
+            .bio-highlight { 
+                border-left: none; border-right: none;
+                border-top: 3px solid var(--accent-gold); 
+                padding-top: 15px; padding-left: 0; padding-right: 0;
+            }
+            .skills-wrapper { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 80px 20px; }
+            .section-title { font-size: 2rem; }
+            nav { padding: 15px 24px; background-color: var(--bg-body); }
+            
+            .nav-links {
+                display: none; position: absolute; top: 70px; right: 0; width: 100%;
+                background: var(--bg-body); flex-direction: column; align-items: center;
+                padding: 40px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+                border-bottom: 1px solid var(--border-subtle);
+            }
+            
+            html[dir="rtl"] .nav-links { left: 0; right: auto; }
+
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: block; }
+            
+            /* Responsive Language Switcher positioning */
+            .lang-switcher { margin: 10px 0; }
+        }
+
+        /* Animation Classes */
+        .hidden { opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
+        .show { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <a href="#" class="logo" aria-label="Home">AG</a>
+        <div class="menu-toggle" id="mobile-menu" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#about" data-i18n="nav_about">About</a></li>
+            <li><a href="#biography" data-i18n="nav_bio">Bio</a></li>
+            <li><a href="#education" data-i18n="nav_edu">Education</a></li>
+            <li><a href="#expertise" data-i18n="nav_exp">Expertise</a></li>
+            <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+            <li><a href="#contact" class="btn" data-i18n="nav_cv">Download CV</a></li>
+            
+            <li class="lang-switcher">
+                <button class="lang-btn" id="lang-toggle">
+                    <span id="current-lang-text">FR</span> 
+                    <i class="fas fa-chevron-down" style="font-size: 0.7em;"></i>
+                </button>
+                <div class="lang-dropdown" id="lang-dropdown">
+                    <div class="lang-option" onclick="changeLanguage('fr')">Français</div>
+                    <div class="lang-option" onclick="changeLanguage('en')">English</div>
+                    <div class="lang-option" onclick="changeLanguage('es')">Español</div>
+                    <div class="lang-option" onclick="changeLanguage('ar')">العربية</div>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="about">
+        <div class="hero-content hidden">
+            <p class="hero-greeting" data-i18n="hero_greeting">Bonjour, je suis</p>
+            <h1 data-i18n="hero_name">Abdellatif Guennoun</h1>
+            <h2 style="font-size: 1.5rem; color: var(--text-body); margin-top: 10px; font-weight: 300; font-family: var(--font-body);" data-i18n="hero_title">Junior Financial Engineer</h2>
+            
+            <div class="hero-tags">
+                <span class="tag">FinTech</span>
+                <span class="tag">InsurTech</span>
+                <span class="tag" data-i18n="tag_islamic">Islamic Banking</span>
+                <span class="tag" data-i18n="tag_val">Valuation & Strategy</span>
+                <span class="tag">M&A</span>
+                <span class="tag">Private Equity</span>
+            </div>
+
+            <p class="hero-subtitle" data-i18n="hero_subtitle">
+                Allier la rigueur de la modélisation financière aux solutions technologiques modernes. Spécialisé en finance éthique et valorisation stratégique.
+            </p>
+            
+            <a href="#" class="btn" data-i18n="hero_btn">Télécharger CV</a>
+        </div>
+        
+        <div class="hero-img-container hidden">
+            <img src="https://6934457a702c750cc85291bb.imgix.net/Gemini_Generated_Image_q03y32q03y32q03y.png" alt="Abdellatif Guennoun - Portrait" class="hero-img">
+        </div>
+    </section>
+
+    <section id="biography" class="hidden">
+        <h2 class="section-title" data-i18n="bio_title">Profil Professionnel</h2>
+        <div class="bio-wrapper">
+            <div class="bio-text">
+                <p data-i18n="bio_p1">
+                    Mon moteur n'est pas seulement la performance financière, mais la sécurité et la sérénité qu'elle apporte aux décideurs. Passionné par la Finance Éthique, je m'attache à construire des stratégies durables qui respectent l'ADN de chaque entreprise. Mon parcours, enrichi par une expérience de vie en Espagne, m'a appris que l'adaptabilité et l'écoute sont tout aussi cruciales que la rigueur technique pour réussir dans un environnement international.
+                </p>
+                
+                <p class="bio-highlight" data-i18n="bio_quote">
+                    "C'est cette double culture, à la fois technique et humaine, que je souhaite aujourd'hui investir dans un nouveau défi."
+                </p>
+
+                <p data-i18n="bio_p2">
+                    Je cultive cette approche — l'exigence de l'auditeur et la curiosité du partenaire — pour transformer les risques en opportunités.
+                </p>
+                <p data-i18n="bio_p3">
+                    Je souhaite désormais rejoindre une équipe où la finance est au service du projet humain, pour créer ensemble de la valeur dans des domaines porteurs de sens comme le micro-crédit ou l'investissement responsable.
+                </p>
+            </div>
+            <div class="bio-image-box">
+                <img src="https://6934457a702c750cc85291bb.imgix.net/WhatsApp%20Image%202025-12-30%20at%2011.17.36%20PM.jpeg" alt="Environnement financier corporate" class="bio-img">
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <h2 class="section-title hidden" data-i18n="edu_title">Formation Académique</h2>
+        <div class="edu-grid">
+            
+            <div class="edu-card hidden">
+                <div class="edu-img-wrapper">
+                    <img src="https://6934457a702c750cc85291bb.imgix.net/03%20Logotipo%20contratipo.png" alt="Universidad de Almería Campus" class="edu-img">
+                </div>
+                <div class="edu-content">
+                    <div class="edu-year" data-i18n="edu1_date">Fév 2025 – Juil 2025</div>
+                    <h3 class="edu-degree" data-i18n="edu1_degree">Erasmus+ KA107 Exchange</h3>
+                    <span class="edu-school" data-i18n="edu1_school">Universidad de Almería – Espagne</span>
+                    <p style="font-size: 0.9rem; color: var(--text-body);" data-i18n="edu1_desc">Spécialisation en Comptabilité et Finance. Programme de mobilité internationale d'excellence.</p>
+                </div>
+            </div>
+
+            <div class="edu-card hidden">
+                <div class="edu-img-wrapper">
+                    <img src="https://6934457a702c750cc85291bb.imgix.net/universite-chouaib-doukkali-maroc-logo.png" alt="Université Chouaib Doukkali Campus" class="edu-img">
+                </div>
+                <div class="edu-content">
+                    <div class="edu-year">2023 – 2025</div>
+                    <h3 class="edu-degree" data-i18n="edu2_degree">Master Ingénierie Financière</h3>
+                    <span class="edu-school" data-i18n="edu2_school">Université Chouaib Doukkali – Maroc</span>
+                    <p style="font-size: 0.9rem; color: var(--text-body);" data-i18n="edu2_desc">Finance Éthique, Modélisation financière et Stratégies d'investissement.</p>
+                </div>
+            </div>
+
+            <div class="edu-card hidden">
+                <div class="edu-img-wrapper">
+                    <img src="https://6934457a702c750cc85291bb.imgix.net/Screenshot%202025-12-28%20154240.png" alt="Université Sultan Moulay Slimane Campus" class="edu-img">
+                </div>
+                <div class="edu-content">
+                    <div class="edu-year">2020 – 2022</div>
+                    <h3 class="edu-degree" data-i18n="edu3_degree">Licence Économie & Gestion</h3>
+                    <span class="edu-school" data-i18n="edu3_school">Université Sultan Moulay Slimane – Maroc</span>
+                    <p style="font-size: 0.9rem; color: var(--text-body);" data-i18n="edu3_desc">Fondamentaux macroéconomiques et gestion d'entreprise.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="expertise">
+        <h2 class="section-title hidden" data-i18n="exp_title">Domaines d'Expertise</h2>
+        <div class="domains-grid">
+            
+            <div class="domain-card hidden">
+                <div class="domain-img-header">
+                    <img src="https://6934457a702c750cc85291bb.imgix.net/12055.jpg" alt="Corporate Finance" class="domain-img">
+                </div>
+                <div class="domain-content">
+                    <h3 class="domain-title" data-i18n="exp1_title">Stratégie & Investissement</h3>
+                    <ul class="domain-list">
+                        <li data-i18n="exp1_1"><i class="fas fa-check"></i> Capital Investissement (Private Equity)</li>
+                        <li data-i18n="exp1_2"><i class="fas fa-check"></i> Fusions & Acquisitions (M&A)</li>
+                        <li data-i18n="exp1_3"><i class="fas fa-check"></i> Ingénierie & Montages Financiers</li>
+                        <li data-i18n="exp1_4"><i class="fas fa-check"></i> Marketing des produits financiers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="domain-card hidden">
+                <div class="domain-img-header">
+                    <img src="https://6934457a702c750cc85291bb.imgix.net/Screenshot%202025-12-30%20215059.png" alt="Banking Operations" class="domain-img">
+                </div>
+                <div class="domain-content">
+                    <h3 class="domain-title" data-i18n="exp2_title">Opérations Bancaires</h3>
+                    <ul class="domain-list">
+                        <li data-i18n="exp2_1"><i class="fas fa-check"></i> Back Office & Middle Office</li>
+                        <li data-i18n="exp2_2"><i class="fas fa-check"></i> Analyse & Gestion des risques</li>
+                        <li data-i18n="exp2_3"><i class="fas fa-check"></i> Opérations de financement</li>
+                        <li data-i18n="exp2_4"><i class="fas fa-check"></i> Inclusion financière & Micro-crédit</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="domain-card hidden">
+                <div class="domain-img-header">
+                    <img src="https://6934457a702c750cc85291bb.imgix.net/Screenshot%202025-12-30%20215842.png" alt="Specialized Finance" class="domain-img">
+                </div>
+                <div class="domain-content">
+                    <h3 class="domain-title" data-i18n="exp3_title">Finance Spécialisée</h3>
+                    <ul class="domain-list">
+                        <li data-i18n="exp3_1"><i class="fas fa-check"></i> Finance Islamique & Participative</li>
+                        <li data-i18n="exp3_2"><i class="fas fa-check"></i> Assurance & Gestion des sinistres</li>
+                        <li data-i18n="exp3_3"><i class="fas fa-check"></i> Conformité & Éthique financière</li>
+                        <li data-i18n="exp3_4"><i class="fas fa-check"></i> Audit bancaire</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="skills-wrapper">
+            
+            <div class="tech-skills hidden">
+                <h2 class="section-title" data-i18n="tech_title">Outils Techniques</h2>
+                <div class="tech-grid">
+                    
+                    <div class="skill-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/sap-3.svg" alt="SAP S/4HANA Logo" class="skill-img">
+                        <span class="skill-name">SAP S/4HANA</span>
+                    </div>
+
+                    <div class="skill-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Microsoft_Office_Excel_%282019%E2%80%932025%29.svg" alt="Excel Logo" class="skill-img">
+                        <span class="skill-name">Adv. Excel</span>
+                    </div>
+
+                    <div class="skill-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI Logo" class="skill-img">
+                        <span class="skill-name">Power BI</span>
+                    </div>
+
+                    <div class="skill-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/mysql-3.svg" alt="SQL Logo" class="skill-img">
+                        <span class="skill-name">SQL</span>
+                    </div>
+
+                    <div class="skill-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/jira-3.svg" alt="Jira Logo" class="skill-img">
+                        <span class="skill-name">JIRA</span>
+                    </div>
+
+                    <div class="skill-item">
+                        <img src="https://cdn.worldvectorlogo.com/logos/trello.svg" alt="Trello Logo" class="skill-img">
+                        <span class="skill-name">Trello</span>
+                    </div>
+
+                    <div class="skill-item">
+                        <img src="https://6934457a702c750cc85291bb.imgix.net/Screenshot%202025-12-28%20184907.png" alt="Sage Logo" class="skill-img" style="background: rgba(255,255,255,0.9); padding: 5px; border-radius: 4px;">
+                        <span class="skill-name">SAGE</span>
+                    </div>
+
+                    <div class="skill-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="AI Tools Logo" class="skill-img">
+                        <span class="skill-name" data-i18n="skill_ai">AI Tools</span>
+                    </div>
+
+                    <div class="skill-item">
+                        <img src="https://6934457a702c750cc85291bb.imgix.net/hd-python-logo-symbol-transparent-png-735811696257415dbkifcuokn.png" alt="Python Logo" class="skill-img">
+                        <span class="skill-name">Python</span>
+                    </div>
+
+                    <div class="skill-item">
+                        <img src="https://www.rensvandeschoot.com/wp-content/uploads/2019/01/spss-1-logo-png-transparent.png" alt="SPSS Logo" class="skill-img">
+                        <span class="skill-name">SPSS</span>
+                    </div>
+
+                    <div class="skill-item">
+                        <img src="https://6934457a702c750cc85291bb.imgix.net/621f8f94654abf384c30d63c.png" alt="Matlab Logo" class="skill-img">
+                        <span class="skill-name">Matlab</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="lang-container hidden">
+                <h3 data-i18n="lang_title">Langues</h3>
+                
+                <div class="lang-item">
+                    <div class="lang-header">
+                        <span data-i18n="lang_ar">Arabe</span>
+                        <span data-i18n="lang_native">Natif</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="100%"></div>
+                    </div>
+                </div>
+
+                <div class="lang-item">
+                    <div class="lang-header">
+                        <span data-i18n="lang_en">Anglais</span>
+                        <span data-i18n="lang_fluent">Courant (C1)</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="90%"></div>
+                    </div>
+                </div>
+
+                <div class="lang-item">
+                    <div class="lang-header">
+                        <span data-i18n="lang_fr">Français</span>
+                        <span data-i18n="lang_fluent2">Courant (C2)</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="95%"></div>
+                    </div>
+                </div>
+
+                <div class="lang-item">
+                    <div class="lang-header">
+                        <span data-i18n="lang_es">Espagnol</span>
+                        <span data-i18n="lang_inter">Intermédiaire (B2)</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="75%"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h2 style="color: var(--text-main); margin-bottom: 20px;" data-i18n="footer_title">Contactez-moi</h2>
+        <p style="max-width: 500px; margin: 0 auto 30px auto; color: var(--text-body);" data-i18n="footer_sub">Actuellement ouvert aux opportunités en Ingénierie Financière et FinTech.</p>
+        
+        <div class="social-component">
+            <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="social-link">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-link">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="mailto:email@example.com" aria-label="Email" class="social-link">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-link">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="social-link">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-link">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+        
+        <p style="margin-top: 40px; opacity: 0.6;">&copy; 2025 Abdellatif Guennoun. Designed for Finance.</p>
+    </footer>
+
+    <script>
+        /* ============================
+           TRANSLATION DATA & LOGIC
+           ============================ */
+        const translations = {
+            fr: {
+                nav_about: "À propos",
+                nav_bio: "Bio",
+                nav_edu: "Formation",
+                nav_exp: "Expertise",
+                nav_skills: "Compétences",
+                nav_cv: "Télécharger CV",
+                hero_greeting: "Bonjour, je suis",
+                hero_name: "Abdellatif Guennoun",
+                hero_title: "Ingénieur Financier Junior",
+                hero_subtitle: "Allier la rigueur de la modélisation financière aux solutions technologiques modernes. Spécialisé en finance éthique et valorisation stratégique.",
+                hero_btn: "Télécharger CV",
+                tag_islamic: "Banque Islamique",
+                tag_val: "Valorisation & Stratégie",
+                bio_title: "Profil Professionnel",
+                bio_p1: "Mon moteur n'est pas seulement la performance financière, mais la sécurité et la sérénité qu'elle apporte aux décideurs. Passionné par la Finance Éthique, je m'attache à construire des stratégies durables qui respectent l'ADN de chaque entreprise. Mon parcours, enrichi par une expérience de vie en Espagne, m'a appris que l'adaptabilité et l'écoute sont tout aussi cruciales que la rigueur technique pour réussir dans un environnement international.",
+                bio_quote: "\"C'est cette double culture, à la fois technique et humaine, que je souhaite aujourd'hui investir dans un nouveau défi.\"",
+                bio_p2: "Je cultive cette approche — l'exigence de l'auditeur et la curiosité du partenaire — pour transformer les risques en opportunités.",
+                bio_p3: "Je souhaite désormais rejoindre une équipe où la finance est au service du projet humain, pour créer ensemble de la valeur dans des domaines porteurs de sens comme le micro-crédit ou l'investissement responsable.",
+                edu_title: "Formation Académique",
+                edu1_date: "Fév 2025 – Juil 2025",
+                edu1_degree: "Échange Erasmus+ KA107",
+                edu1_school: "Université d'Almería – Espagne",
+                edu1_desc: "Spécialisation en Comptabilité et Finance. Programme de mobilité internationale d'excellence.",
+                edu2_degree: "Master Ingénierie Financière",
+                edu2_school: "Université Chouaib Doukkali – Maroc",
+                edu2_desc: "Finance Éthique, Modélisation financière et Stratégies d'investissement.",
+                edu3_degree: "Licence Économie & Gestion",
+                edu3_school: "Université Sultan Moulay Slimane – Maroc",
+                edu3_desc: "Fondamentaux macroéconomiques et gestion d'entreprise.",
+                exp_title: "Domaines d'Expertise",
+                exp1_title: "Stratégie & Investissement",
+                exp1_1: "<i class='fas fa-check'></i> Capital Investissement (Private Equity)",
+                exp1_2: "<i class='fas fa-check'></i> Fusions & Acquisitions (M&A)",
+                exp1_3: "<i class='fas fa-check'></i> Ingénierie & Montages Financiers",
+                exp1_4: "<i class='fas fa-check'></i> Marketing des produits financiers",
+                exp2_title: "Opérations Bancaires",
+                exp2_1: "<i class='fas fa-check'></i> Back Office & Middle Office",
+                exp2_2: "<i class='fas fa-check'></i> Analyse & Gestion des risques",
+                exp2_3: "<i class='fas fa-check'></i> Opérations de financement",
+                exp2_4: "<i class='fas fa-check'></i> Inclusion financière & Micro-crédit",
+                exp3_title: "Finance Spécialisée",
+                exp3_1: "<i class='fas fa-check'></i> Finance Islamique & Participative",
+                exp3_2: "<i class='fas fa-check'></i> Assurance & Gestion des sinistres",
+                exp3_3: "<i class='fas fa-check'></i> Conformité & Éthique financière",
+                exp3_4: "<i class='fas fa-check'></i> Audit bancaire",
+                tech_title: "Outils Techniques",
+                skill_ai: "Outils IA",
+                lang_title: "Langues",
+                lang_ar: "Arabe",
+                lang_native: "Natif",
+                lang_en: "Anglais",
+                lang_fluent: "Courant (C1)",
+                lang_fr: "Français",
+                lang_fluent2: "Courant (C2)",
+                lang_es: "Espagnol",
+                lang_inter: "Intermédiaire (B2)",
+                footer_title: "Contactez-moi",
+                footer_sub: "Actuellement ouvert aux opportunités en Ingénierie Financière et FinTech."
+            },
+            en: {
+                nav_about: "About",
+                nav_bio: "Bio",
+                nav_edu: "Education",
+                nav_exp: "Expertise",
+                nav_skills: "Skills",
+                nav_cv: "Download CV",
+                hero_greeting: "Hi, I am",
+                hero_name: "Abdellatif Guennoun",
+                hero_title: "Junior Financial Engineer",
+                hero_subtitle: "Bridging the gap between rigorous financial modeling and modern technological solutions. Specialized in ethical finance and strategic valuation.",
+                hero_btn: "Download CV",
+                tag_islamic: "Islamic Banking",
+                tag_val: "Valuation & Strategy",
+                bio_title: "Professional Profile",
+                bio_p1: "My driving force is not just financial performance, but the security and serenity it brings to decision-makers. Passionate about Ethical Finance, I strive to build sustainable strategies that respect each company's DNA. Enriched by my experience living in Spain, I learned that adaptability and listening are just as crucial as technical rigor for success in an international environment.",
+                bio_quote: "\"It is this dual culture, both technical and human, that I wish to invest in a new challenge today.\"",
+                bio_p2: "I cultivate this approach — the rigor of the auditor and the curiosity of the partner — to transform risks into opportunities.",
+                bio_p3: "I now wish to join a team where finance serves the human project, to create value together in meaningful fields such as micro-credit or responsible investment.",
+                edu_title: "Academic Background",
+                edu1_date: "Feb 2025 – Jul 2025",
+                edu1_degree: "Erasmus+ KA107 Exchange",
+                edu1_school: "University of Almería – Spain",
+                edu1_desc: "Specialization in Accounting and Finance. International Mobility Program of Excellence.",
+                edu2_degree: "Master in Financial Engineering",
+                edu2_school: "Chouaib Doukkali University – Morocco",
+                edu2_desc: "Ethical Finance, Financial Modeling, and Investment Strategies.",
+                edu3_degree: "BA in Economics & Management",
+                edu3_school: "Sultan Moulay Slimane University – Morocco",
+                edu3_desc: "Macroeconomic fundamentals and business management.",
+                exp_title: "Areas of Expertise",
+                exp1_title: "Strategy & Investment",
+                exp1_1: "<i class='fas fa-check'></i> Private Equity",
+                exp1_2: "<i class='fas fa-check'></i> Mergers & Acquisitions (M&A)",
+                exp1_3: "<i class='fas fa-check'></i> Financial Engineering & Structuring",
+                exp1_4: "<i class='fas fa-check'></i> Financial Product Marketing",
+                exp2_title: "Banking Operations",
+                exp2_1: "<i class='fas fa-check'></i> Back Office & Middle Office",
+                exp2_2: "<i class='fas fa-check'></i> Risk Analysis & Management",
+                exp2_3: "<i class='fas fa-check'></i> Financing Operations",
+                exp2_4: "<i class='fas fa-check'></i> Financial Inclusion & Micro-credit",
+                exp3_title: "Specialized Finance",
+                exp3_1: "<i class='fas fa-check'></i> Islamic & Participatory Finance",
+                exp3_2: "<i class='fas fa-check'></i> Insurance & Claims Management",
+                exp3_3: "<i class='fas fa-check'></i> Compliance & Financial Ethics",
+                exp3_4: "<i class='fas fa-check'></i> Banking Audit",
+                tech_title: "Technical Tools",
+                skill_ai: "AI Tools",
+                lang_title: "Languages",
+                lang_ar: "Arabic",
+                lang_native: "Native",
+                lang_en: "English",
+                lang_fluent: "Fluent (C1)",
+                lang_fr: "French",
+                lang_fluent2: "Fluent (C2)",
+                lang_es: "Spanish",
+                lang_inter: "Intermediate (B2)",
+                footer_title: "Get in Touch",
+                footer_sub: "Currently open to opportunities in Financial Engineering and FinTech."
+            },
+            es: {
+                nav_about: "Sobre mí",
+                nav_bio: "Bio",
+                nav_edu: "Formación",
+                nav_exp: "Experiencia",
+                nav_skills: "Habilidades",
+                nav_cv: "Descargar CV",
+                hero_greeting: "Hola, soy",
+                hero_name: "Abdellatif Guennoun",
+                hero_title: "Ingeniero Financiero Junior",
+                hero_subtitle: "Uniendo el rigor del modelado financiero con soluciones tecnológicas modernas. Especializado en finanzas éticas y valoración estratégica.",
+                hero_btn: "Descargar CV",
+                tag_islamic: "Banca Islámica",
+                tag_val: "Valoración y Estrategia",
+                bio_title: "Perfil Profesional",
+                bio_p1: "Mi motivación no es solo el rendimiento financiero, sino la seguridad y serenidad que aporta a los tomadores de decisiones. Apasionado por las Finanzas Éticas, me esfuerzo por construir estrategias sostenibles que respeten el ADN de cada empresa. Mi experiencia viviendo en España me enseñó que la adaptabilidad y la escucha son tan cruciales como el rigor técnico para el éxito en un entorno internacional.",
+                bio_quote: "\"Es esta doble cultura, tanto técnica como humana, la que deseo invertir hoy en un nuevo desafío.\"",
+                bio_p2: "Cultivo este enfoque — la exigencia del auditor y la curiosidad del socio — para transformar los riesgos en oportunidades.",
+                bio_p3: "Ahora deseo unirme a un equipo donde las finanzas sirvan al proyecto humano, para crear valor juntos en campos con sentido como el microcrédito o la inversión responsable.",
+                edu_title: "Formación Académica",
+                edu1_date: "Feb 2025 – Jul 2025",
+                edu1_degree: "Intercambio Erasmus+ KA107",
+                edu1_school: "Universidad de Almería – España",
+                edu1_desc: "Especialización en Contabilidad y Finanzas. Programa de Movilidad Internacional de Excelencia.",
+                edu2_degree: "Máster en Ingeniería Financiera",
+                edu2_school: "Universidad Chouaib Doukkali – Marruecos",
+                edu2_desc: "Finanzas Éticas, Modelado Financiero y Estrategias de Inversión.",
+                edu3_degree: "Grado en Economía y Gestión",
+                edu3_school: "Universidad Sultan Moulay Slimane – Marruecos",
+                edu3_desc: "Fundamentos macroeconómicos y gestión empresarial.",
+                exp_title: "Áreas de Experiencia",
+                exp1_title: "Estrategia e Inversión",
+                exp1_1: "<i class='fas fa-check'></i> Capital Riesgo (Private Equity)",
+                exp1_2: "<i class='fas fa-check'></i> Fusiones y Adquisiciones (M&A)",
+                exp1_3: "<i class='fas fa-check'></i> Ingeniería y Estructuración Financiera",
+                exp1_4: "<i class='fas fa-check'></i> Marketing de Productos Financieros",
+                exp2_title: "Operaciones Bancarias",
+                exp2_1: "<i class='fas fa-check'></i> Back Office y Middle Office",
+                exp2_2: "<i class='fas fa-check'></i> Análisis y Gestión de Riesgos",
+                exp2_3: "<i class='fas fa-check'></i> Operaciones de Financiación",
+                exp2_4: "<i class='fas fa-check'></i> Inclusión Financiera y Microcrédito",
+                exp3_title: "Finanzas Especializadas",
+                exp3_1: "<i class='fas fa-check'></i> Finanzas Islámicas y Participativas",
+                exp3_2: "<i class='fas fa-check'></i> Seguros y Gestión de Siniestros",
+                exp3_3: "<i class='fas fa-check'></i> Cumplimiento y Ética Financiera",
+                exp3_4: "<i class='fas fa-check'></i> Auditoría Bancaria",
+                tech_title: "Herramientas Técnicas",
+                skill_ai: "Herramientas IA",
+                lang_title: "Idiomas",
+                lang_ar: "Árabe",
+                lang_native: "Nativo",
+                lang_en: "Inglés",
+                lang_fluent: "Fluido (C1)",
+                lang_fr: "Francés",
+                lang_fluent2: "Fluido (C2)",
+                lang_es: "Español",
+                lang_inter: "Intermedio (B2)",
+                footer_title: "Contáctame",
+                footer_sub: "Actualmente abierto a oportunidades en Ingeniería Financiera y FinTech."
+            },
+            ar: {
+                nav_about: "حول",
+                nav_bio: "سيرة ذاتية",
+                nav_edu: "التعليم",
+                nav_exp: "الخبرات",
+                nav_skills: "المهارات",
+                nav_cv: "تحميل السيرة الذاتية",
+                hero_greeting: "مرحباً، أنا",
+                hero_name: "عبد اللطيف كنون",
+                hero_title: "مهندس مالي مبتدئ",
+                hero_subtitle: "الجمع بين دقة النمذجة المالية والحلول التكنولوجية الحديثة. متخصص في التمويل الأخلاقي والتقييم الاستراتيجي.",
+                hero_btn: "تحميل السيرة الذاتية",
+                tag_islamic: "الصيرفة الإسلامية",
+                tag_val: "التقييم والاستراتيجية",
+                bio_title: "الملف المهني",
+                bio_p1: "دافعي ليس فقط الأداء المالي، بل الأمان والسكينة التي يوفرها لصناع القرار. شغوف بالتمويل الأخلاقي، أسعى لبناء استراتيجيات مستدامة تحترم هوية كل شركة. علمتني تجربتي في إسبانيا أن التكيف والاستماع لا يقلان أهمية عن الدقة التقنية للنجاح في بيئة دولية.",
+                bio_quote: "\"هذه الثقافة المزدوجة، التقنية والإنسانية، هي ما أرغب في استثماره اليوم في تحدٍ جديد.\"",
+                bio_p2: "أتبنى هذا النهج — صرامة المدقق وفضول الشريك — لتحويل المخاطر إلى فرص.",
+                bio_p3: "أرغب الآن في الانضمام إلى فريق يخدم فيه التمويل المشروع الإنساني، لنخلق قيمة معاً في مجالات ذات مغزى مثل القروض الصغيرة أو الاستثمار المسؤول.",
+                edu_title: "الخلفية الأكاديمية",
+                edu1_date: "فبراير 2025 – يوليو 2025",
+                edu1_degree: "تبادل إيراسموس+ KA107",
+                edu1_school: "جامعة ألميريا – إسبانيا",
+                edu1_desc: "تخصص في المحاسبة والمالية. برنامج تنقل دولي متميز.",
+                edu2_degree: "ماجستير في الهندسة المالية",
+                edu2_school: "جامعة شعيب الدكالي – المغرب",
+                edu2_desc: "التمويل الأخلاقي، النمذجة المالية واستراتيجيات الاستثمار.",
+                edu3_degree: "إجازة في الاقتصاد والتسيير",
+                edu3_school: "جامعة السلطان مولاي سليمان – المغرب",
+                edu3_desc: "أساسيات الاقتصاد الكلي وإدارة الأعمال.",
+                exp_title: "مجالات الخبرة",
+                exp1_title: "الاستراتيجية والاستثمار",
+                exp1_1: "<i class='fas fa-check'></i> الأسهم الخاصة (Private Equity)",
+                exp1_2: "<i class='fas fa-check'></i> الاندماج والاستحواذ (M&A)",
+                exp1_3: "<i class='fas fa-check'></i> الهندسة والهيكلة المالية",
+                exp1_4: "<i class='fas fa-check'></i> تسويق المنتجات المالية",
+                exp2_title: "العمليات البنكية",
+                exp2_1: "<i class='fas fa-check'></i> المكاتب الخلفية والوسطى",
+                exp2_2: "<i class='fas fa-check'></i> تحليل وإدارة المخاطر",
+                exp2_3: "<i class='fas fa-check'></i> عمليات التمويل",
+                exp2_4: "<i class='fas fa-check'></i> الشمول المالي والقروض الصغيرة",
+                exp3_title: "التمويل المتخصص",
+                exp3_1: "<i class='fas fa-check'></i> التمويل الإسلامي والتشاركي",
+                exp3_2: "<i class='fas fa-check'></i> التأمين وإدارة المطالبات",
+                exp3_3: "<i class='fas fa-check'></i> الامتثال والأخلاقيات المالية",
+                exp3_4: "<i class='fas fa-check'></i> التدقيق البنكي",
+                tech_title: "الأدوات التقنية",
+                skill_ai: "أدوات الذكاء الاصطناعي",
+                lang_title: "اللغات",
+                lang_ar: "العربية",
+                lang_native: "اللغة الأم",
+                lang_en: "الخنجليزية",
+                lang_fluent: "بطلاقة (C1)",
+                lang_fr: "الفرنسية",
+                lang_fluent2: "بطلاقة (C2)",
+                lang_es: "الإسبانية",
+                lang_inter: "متوسط (B2)",
+                footer_title: "تواصل معي",
+                footer_sub: "مفتوح حالياً لفرص في الهندسة المالية والتكنولوجيا المالية."
+            }
+        };
+
+        function changeLanguage(lang) {
+            // 1. Update text content
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    // Check if content contains HTML (for icons)
+                    if (translations[lang][key].includes('<')) {
+                        element.innerHTML = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+
+            // 2. Handle Direction (RTL for Arabic)
+            const html = document.documentElement;
+            if (lang === 'ar') {
+                html.setAttribute('dir', 'rtl');
+                html.setAttribute('lang', 'ar');
+            } else {
+                html.setAttribute('dir', 'ltr');
+                html.setAttribute('lang', lang);
+            }
+
+            // 3. Update Dropdown Button Text
+            document.getElementById('current-lang-text').textContent = lang.toUpperCase();
+
+            // 4. Save Preference
+            localStorage.setItem('preferredLang', lang);
+
+            // 5. Close Dropdown
+            document.getElementById('lang-dropdown').classList.remove('active');
+        }
+
+        // Dropdown Toggle Logic
+        const langToggle = document.getElementById('lang-toggle');
+        const langDropdown = document.getElementById('lang-dropdown');
+
+        langToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!langDropdown.contains(e.target) && !langToggle.contains(e.target)) {
+                langDropdown.classList.remove('active');
+            }
+        });
+
+        // Initialize Language on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLang') || 'fr';
+            changeLanguage(savedLang);
+        });
+
+        // 1. Sticky Navigation
+        const nav = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // 2. Mobile Menu Toggle
+        const menuToggle = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // 3. Scroll Animation (Fade In & Progress Bars)
+        const observerOptions = {
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    
+                    const progressBars = entry.target.querySelectorAll('.progress-fill');
+                    progressBars.forEach(bar => {
+                        const width = bar.getAttribute('data-width');
+                        bar.style.width = width;
+                    });
+
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const hiddenElements = document.querySelectorAll('.hidden');
+        hiddenElements.forEach((el) => observer.observe(el));
+        
+        const langContainer = document.querySelector('.lang-container');
+        if(langContainer) observer.observe(langContainer);
+    </script>
+</body>
+</html>
